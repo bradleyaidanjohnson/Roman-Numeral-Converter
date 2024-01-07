@@ -1,50 +1,32 @@
-const number = document.getElementById("number")
-const convertButton = document.getElementById("convert-btn")
-const output = document.getElementById("output")
+const number = document.getElementById("number");
+const convertButton = document.getElementById("convert-btn");
+const output = document.getElementById("output");
 
-const converter = (int) => {
-  if (int === 0) {
-    return '';
-  } else if (int >= 1000) {
-    int -= 1000;
-    return "M" + converter(int);
-  } else if (int >= 900) {
-    int -= 900;
-    return "CM" + converter(int);
-  } else if (int >= 500) {
-    int -= 500;
-    return "D" + converter(int);
-  } else if (int >= 400) {
-    int -= 400;
-    return "CD" + converter(int);
-  } else if (int >= 100) {
-    int -= 100;
-    return "C" + converter(int);
-  } else if (int >= 90) {
-    int -= 90;
-    return "XC" + converter(int);
-  } else if (int >= 50) {
-    int -= 50;
-    return "L" + converter(int);
-  } else if (int >= 40) {
-    int -= 40;
-    return "XL" + converter(int);
-  } else if (int >= 10) {
-    int -= 10;
-    return "X" + converter(int);
-  } else if (int >= 9) {
-    int -= 9;
-    return "IX" + converter(int);
-  } else if (int >= 5) {
-    int -= 5;
-    return "V" + converter(int);
-  } else if (int >= 4) {
-    int -= 4;
-    return "IV" + converter(int);
-  } else if (int >= 1) {
-    int-= 1;
-    return "I" + converter(int);
-}
+const romanNumerals = [
+  { value: 1000, symbol: 'M' },
+  { value: 900, symbol: 'CM' },
+  { value: 500, symbol: 'D' },
+  { value: 400, symbol: 'CD' },
+  { value: 100, symbol: 'C' },
+  { value: 90, symbol: 'XC' },
+  { value: 50, symbol: 'L' },
+  { value: 40, symbol: 'XL' },
+  { value: 10, symbol: 'X' },
+  { value: 9, symbol: 'IX' },
+  { value: 5, symbol: 'V' },
+  { value: 4, symbol: 'IV' },
+  { value: 1, symbol: 'I' },
+];
+
+const converter = (num) => {
+  let result = '';
+  romanNumerals.forEach((item) => {
+    while(num >= item.value) {
+      result += item.symbol;
+      num -= item.value;
+    }
+  });
+  return result;
 }
 
 convertButton.addEventListener("click", (e) =>{
